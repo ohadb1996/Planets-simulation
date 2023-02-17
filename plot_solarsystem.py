@@ -84,17 +84,19 @@ def plot_energy(multiple_data):
     plt.legend()
     plt.show()
 
+
 if __name__ == "__main__":
     years = input("Welcome :)\n"
           "For how many years would you like to see the simulation?\n")
     if years.isdigit():
         years = int(years)*365
         data = simu.simulate(years, 86400)# 86400 = seconds in a single day = (seconds in a minute)*(minutes in an hour)*(hours in a day)
+        print("allright, what would you like to see now?:\n")
         while True:
-            option = input("allright, what would you like to see now?:\n"
+            option = input(
                   "1.Trajectory\n"
                   "2.Sun distances\n"
-                  "3.Kepler_third_law\n"
+                  "3.Kepler third law\n"
                   "4.Kinetic,potentional and total energy\n"
                   "5.Change year\n"
                   "6.Exit program\n")
@@ -121,6 +123,8 @@ if __name__ == "__main__":
                 else:
                     print("Not an option 1 to 4, exiting program. goodbye:)")
                     break
+                print("allright, whats next?")
     else:
         print("Invalid year. goodbye! :)")
+
 
