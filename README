@@ -1,0 +1,6 @@
+--for python version 3.10--This Project is from TLV-University.
+the project represents a simulation of the way planets are moving in space and the changes of their Kinetic & Potential Energy during the time the user wishes(in years). 
+the results are shown in 3D & 2D matplot that receives the information from a CSV file(by using Pandas Dataframe and Numpy)
+
+for activate the simulation please run the plot_solar_system file.
+good luck ;)
