@@ -63,9 +63,9 @@ def plot_kepler_third_law(multiple_data):
     plt.show()
 
 
-def plot_energy(multiple_data):
+def plot_KE(multiple_data):
     """
-    Plots kinetic, potential and total energy of the system as a function of time
+    Plot of kinetic energy of the system as a function of time
     :param multiple_data: object data returned from simulate
     """
     daysKE = simu.get_kinetic_energy(multiple_data)
@@ -74,21 +74,33 @@ def plot_energy(multiple_data):
     plt.legend()
     plt.show()
 
+def plot_PE(multiple_data):
+    """
+    Plot of potential energy of the system as a function of time
+    :param multiple_data: object data returned from simulate
+    """
     daysPE = simu.get_potential_energy(multiple_data)
+    days = [i for i in range(len(daysPE))]
     plt.plot(days, daysPE, label="Potential Energy")
     plt.legend()
     plt.show()
 
+def plot_ToTE(multiple_data):
+    """
+    Plot of total energy of the system as a function of time
+    :param multiple_data: object data returned from simulate
+    """
     TOTenergy = simu.get_total_energy(multiple_data)
+    days = [i for i in range(len(TOTenergy))]
     plt.plot(days, TOTenergy, label="Total Energy")
     plt.legend()
     plt.show()
-
 
 if __name__ == "__main__":
     years = input("Welcome :)\n"
           "For how many years would you like to see the simulation?\n")
     if years.isdigit():
+        opperations = [plot_trajectory,plot_sun_distances,plot_kepler_third_law,plot_KE,plot_PE,plot_ToTE]
         years = int(years)*365
         data = simu.simulate(years, 86400)# 86400 = seconds in a single day = (seconds in a minute)*(minutes in an hour)*(hours in a day)
         print("allright, what would you like to see now?:\n")
@@ -97,34 +109,32 @@ if __name__ == "__main__":
                   "1.Trajectory\n"
                   "2.Sun distances\n"
                   "3.Kepler third law\n"
-                  "4.Kinetic,potentional and total energy\n"
-                  "5.Change year\n"
-                  "6.Exit program\n")
+                  "4.Kinetic energy\n"
+                  "5.potentional energy\n"
+                  "6.total energy that spent\n"
+                  "7.Change year\n"
+                  "8.Exit program\n")
             if option.isdigit():
                 option = int(option)
-                if option == 1:
-                    plot_trajectory(data)
-                elif option == 2:
-                    plot_sun_distances(data)
-                elif option == 3:
-                    plot_kepler_third_law(data)
-                elif option == 4:
-                    plot_energy(data)
-                elif option == 5:
+                if 1 <= option <= 6:
+                    print("before trying a new option, please exit from the plot")
+                    opperations[option-1](data)
+                elif option == 7:
                     oldYear = years
-                    years = input("insert now the new year :)")
+                    years = input("insert here the new year :)\n")
                     if years.isdigit():
-                        print("this number is valid,changeing to this new number of years.")
+                        print("this number is valid,changeing time line.")
                         years = int(years) * 365
                         data = simu.simulate(years, 86400)
                     else:
                         print("Failed to change year. keeping the last years option")
                         years = oldYear
+                elif option == 8:
+                    print("goodbye!:)")
+                    break
                 else:
-                    print("Not an option 1 to 4, exiting program. goodbye:)")
+                    print("Invalid option. goodbye! :)")
                     break
                 print("allright, whats next?")
     else:
         print("Invalid year. goodbye! :)")
-
-
